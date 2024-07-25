@@ -17,7 +17,15 @@ const LoginAuth = () => {
       });
       console.log(response.data);
       setError(''); // Reset error state on successful login
-      navigate('/admin');
+
+      // Redirect based on user level
+      if (response.data.level === 1) {
+        navigate('/admin');
+      } else if (response.data.level === 2) {
+        navigate('/user');
+      } else {
+        setError('User level not recognized.');
+      }
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setError('Email atau password salah.');

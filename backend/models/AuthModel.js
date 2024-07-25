@@ -1,27 +1,30 @@
-import { Sequelize } from "sequelize";
-import db from "../config/Database.js";
+  import { Sequelize } from "sequelize";
+  import db from "../config/Database.js";
 
-const { DataTypes } = Sequelize;
+  const { DataTypes } = Sequelize;
 
-const Auth = db.define(
-  "auth",
-  {
-    username: {
-      type: DataTypes.STRING,
+  const Auth = db.define(
+    "auth",
+    {
+      username: {
+        type: DataTypes.STRING,
+      },
+      email: {
+        type: DataTypes.STRING,
+      },
+      password: {
+        type: DataTypes.STRING,
+      },
+      level: {
+        type: DataTypes.INTEGER,
+      },
+      refresh_token: {
+        type: DataTypes.TEXT,
+      },
     },
-    email: {
-      type: DataTypes.STRING,
-    },
-    password: {
-      type: DataTypes.STRING,
-    },
-    refresh_token: {
-      type: DataTypes.TEXT,
-    },
-  },
-  {
-    freezeTableName: true,
-  }
-);
+    {
+      freezeTableName: true,
+    }
+  );
 
-export default Auth;
+  export default Auth;

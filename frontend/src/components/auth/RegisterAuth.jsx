@@ -23,6 +23,7 @@ const RegisterAuth = () => {
         email,
         password,
         confirm_password: confirmPassword,
+        level: 2, // Menambahkan level 2
       });
       console.log(response.data);
       navigate('/login');

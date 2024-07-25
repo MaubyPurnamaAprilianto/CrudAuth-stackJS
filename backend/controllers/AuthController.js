@@ -24,17 +24,19 @@ export const Register = async (req, res) => {
   const hashPassword = await bcrypt.hash(password, salt);
 
   try {
-
     await Auth.create({
       username,
       email,
       password: hashPassword,
+      level: 2 // Menambahkan level 2
     });
     res.status(201).json({ msg: "Registration Successful" });
   } catch (error) {
     console.log(error);
+    res.status(500).json({ msg: "Server Error" }); // Menambahkan pesan kesalahan jika ada error
   }
 };
+
 
 export const Login = async (req, res) => {
   try {
@@ -56,8 +58,8 @@ export const Login = async (req, res) => {
     // Jika password tidak cocok
     if (!match) return res.status(400).json({ msg: "Wrong Password" });
 
-    // Jika password cocok
-    res.status(200).json({ msg: "Login Successful" });
+    // Jika password cocok, kirimkan level user bersama dengan pesan sukses
+    res.status(200).json({ msg: "Login Successful", level: user[0].level });
   } catch (error) {
     console.log(error); // Log error ke console
     res.status(500).json({ msg: "Server Error" }); // Kembalikan status 500 dengan pesan "Server Error"
